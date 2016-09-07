@@ -1,6 +1,6 @@
 //data gen X strings of Y length (or less) outputs to file
-//prog that takes in that file and saves on memory the strings in lexographic order on mem
-//sorts strings using those program and sorts into three data sets, (runs three times,
+//prog that takes in that file and saves on memory the strings in lexographic order
+//sorts strings using those program and sorts into three data sets, (runs three times)
 
 using namespace std;
 #include <fstream>
