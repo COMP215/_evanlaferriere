@@ -10,7 +10,7 @@ using namespace std;
 #include <stdlib.h>
 
 struct Parameters{ //A struct to carry all arguments
-    int number_words;
+    int num_words;
     string fileName;
     string* words;
 };
@@ -21,17 +21,17 @@ int Three(Parameters words)
     long startTime = time(NULL);
     string wordHolder;
     bool unsorted = true;
-    int place = rand()%words.number_words;
+    int place = rand()%words.num_words;
     while (unsorted)
     {
         unsorted = false;
-        for(int i = 1; i < words.number_words; i++)
+        for(int i = 1; i < words.num_words; i++)
         {
-            if(words.words[words.number_words-i].compare(words.words[words.number_words-1])>0)
+            if(words.words[words.num_words-i].compare(words.words[words.num_words-1])>0)
             {
-                wordHolder = words.words[words.number_words-i];
-                words.words[words.number_words-i] = words.words[words.number_words-1];
-                words.words[words.number_words-1] = wordHolder;
+                wordHolder = words.words[words.num_words-i];
+                words.words[words.num_words-i] = words.words[words.num_words-1];
+                words.words[words.num_words-1] = wordHolder;
                 unsorted = true;
             }
         }
@@ -44,15 +44,15 @@ Parameters Two(Parameters words)
 {
     bool unsorted = true;
     ifstream in(words.fileName.c_str());
-    words.words = new string[words.number_words];
-    for (int i = 0; i < words.number_words; i++)
+    words.words = new string[words.num_words];
+    for (int i = 0; i < words.num_words; i++)
     {
          getline(in, words.words[i]);
     }
     while (unsorted)
     {
         unsorted = false;
-        for(int i = 0; i+1 < words.number_words; i++)
+        for(int i = 0; i+1 < words.num_words; i++)
         {
             string holder = ""; //for sorting
             if (words.words[i].compare(words.words[i+1]) > 0)
@@ -73,7 +73,7 @@ Parameters One()
     const string randGen = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtuvwxyz";
 
     cout << "How many words would you like to generate? ";
-    cin >> user_input.number_words;
+    cin >> user_input.num_words;
     cout << "How long would you like your words to be? ";
     int length_words;
     cin >> length_words;
@@ -81,7 +81,7 @@ Parameters One()
     cin >> user_input.fileName;
     ofstream outfile(user_input.fileName.c_str());
 
-    for(int i=0; i < user_input.number_words; i++)
+    for(int i=0; i < user_input.num_words; i++)
     {
         string word = "";
         for(int j=0; j < length_words; j++)
