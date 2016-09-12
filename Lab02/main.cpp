@@ -1,6 +1,6 @@
 //data gen X strings of Y length (or less) outputs to file
-//prog that takes in that file and saves on memory the strings in lexographic order on mem
-//sorts strings using those program and sorts into three data sets, (runs three times,
+//prog that takes in that file and saves on memory the strings in lexographic order
+//sorts strings using those program and sorts into three data sets, (runs three times)
 
 using namespace std;
 #include <fstream>
@@ -9,13 +9,13 @@ using namespace std;
 #include <stdio.h>
 #include <stdlib.h>
 
-struct parameters{ //A struct to carry all arguments
+struct Parameters{ //A struct to carry all arguments
     int numWords;
     string fileName;
     string* words;
 };
 
-int three(parameters words)
+int Three(Parameters words)
 {
     srand(time(NULL));
     long startTime = time(NULL);
@@ -40,21 +40,46 @@ int three(parameters words)
     return (endTime - startTime);
 }
 
-parameters one()
+Parameters Two(Parameters words)
+{
+    bool unsorted = true;
+    ifstream in(words.fileName.c_str());
+    words.words = new string[words.numWords];
+    for (int i = 0; i < words.numWords; i++)
+    {
+         getline(in, words.words[i]);
+    }
+    while (unsorted)
+    {
+        unsorted = false;
+        for(int i = 0; i+1 < words.numWords; i++)
+        {
+            string holder; //for sorting
+            if (words.words[i].compare(words.words[i+1]) > 0)
+            {
+                holder = words.words[i];
+                words.words[i] = words.words[i+1];
+                words.words[i+1] = holder;
+                unsorted = true;
+            }
+        }
+    }
+    return words;
+}
+Parameters One()
 {
     srand (time(NULL));
-    int lengthWords;
-    parameters userInput;
+    Parameters userInput;
     const string randGen = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtuvwxyz";
 
     cout << "How many words would you like to generate? ";
     cin >> userInput.numWords;
     cout << "How long would you like your words to be? ";
+    int lengthWords;
     cin >> lengthWords;
     cout << "And under what name would you like to save the file? ";
     cin >> userInput.fileName;
-    ofstream outfile;
-    outfile.open(userInput.fileName.c_str());
+    ofstream outfile(userInput.fileName.c_str());
 
     for(int i=0; i < userInput.numWords; i++)
     {
@@ -70,40 +95,14 @@ parameters one()
     return userInput;
 }
 
-parameters two(parameters words)
-{
-    bool unsorted = true;
-    ifstream in(words.fileName.c_str());
-    words.words = new string[words.numWords];
-    for (int i = 0; i < words.numWords; i++)
-    {
-         getline(in, words.words[i]);
-    }
-    while (unsorted)
-    {
-        unsorted = false;
-        for(int i = 0; i+1 < words.numWords; i++)
-        {
-            string holder;
-            if (words.words[i].compare(words.words[i+1]) > 0)
-            {
-                holder = words.words[i];
-                words.words[i] = words.words[i+1];
-                words.words[i+1] = holder;
-                unsorted = true;
-            }
-        }
-    }
-    return words;
-}
 
 int main()
 {
-    int processingTime1 = three(two(one()));
+    int processingTime1 = Three(Two(One()));
     cout << "Completed in " << processingTime1 << " seconds." << endl;
-    int processingTime2 = three(two(one()));
+    int processingTime2 = Three(Two(One()));
     cout << "Completed in " << processingTime2 << " seconds." << endl;
-    int processingTime3 = three(two(one()));
+    int processingTime3 = Three(Two(One()));
     cout << "Completed in " << processingTime3 << " seconds." << endl;
     cout << "Done! It took " << processingTime1+processingTime2+processingTime3 << " seconds.";
     return 0;
