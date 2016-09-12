@@ -11,7 +11,7 @@ using namespace std;
 
 struct Parameters{ //A struct to carry all arguments
     int num_words;
-    string fileName;
+    string file_name;
     string* words;
 };
 
@@ -43,7 +43,7 @@ int Three(Parameters words)
 Parameters Two(Parameters words)
 {
     bool unsorted = true;
-    ifstream in(words.fileName.c_str());
+    ifstream in(words.file_name.c_str());
     words.words = new string[words.num_words];
     for (int i = 0; i < words.num_words; i++)
     {
@@ -78,8 +78,8 @@ Parameters One()
     int length_words;
     cin >> length_words;
     cout << "And under what name would you like to save the file? ";
-    cin >> user_input.fileName;
-    ofstream outfile(user_input.fileName.c_str());
+    cin >> user_input.file_name;
+    ofstream outfile(user_input.file_name.c_str());
 
     for(int i=0; i < user_input.num_words; i++)
     {
