@@ -53,11 +53,15 @@ void LinkedList::add(int where_to, int to_add)
 }
 void LinkedList::print()
 {
-    Node* printing_node = buffer_;
-    while(printing_node != tail_)
+    Node* printing_node = buffer_->next;
+    cout << "There were ";
+    while(printing_node->next != tail_)
     {
-        cout << printing_node->num << endl;
+        cout << printing_node->num << ", ";
+        printing_node = printing_node->next;
     }
+    printing_node = printing_node->next;
+    cout << "and " << printing_node->num << " in the list." << endl;
 }
 
 int main()
@@ -66,15 +70,11 @@ int main()
     int user_in = 1;
     while(user_in)
     {
-        cout << "Input an int, or don't to end this.";
+        cout << "Input an int, or don't to end this. ";
         cin >> user_in;
+        if (cin.fail())
+            break;
         Foo.add(user_in);
     }
-    cout << "Would you like to print the list? Y/N";
-    string response = "";
-    cin >> response;
-    if (response == "Y")
-    {
-        Foo.print();
-    }
+    Foo.print();
 }
