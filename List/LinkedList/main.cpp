@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "LinkedList.h"
 using namespace std;
 class Node
 {
@@ -26,9 +26,9 @@ Node::Node(int num, Node* next)
 
 class LinkedList
 {
+    public:
     Node* buffer_ = new Node;
     Node* tail_ = buffer_;
-    public:
         void add(int what);
         void add(int where, int what);
         void print();
@@ -54,7 +54,8 @@ void add::LinkedList(int where, int what)
 }
 void print::LinkedList()
 {
-    Node* printing_node = this->buffer_;
+    Node* printing_node = buffer_;
+    while(printing_node != tail_)
 }
 
 int main()
