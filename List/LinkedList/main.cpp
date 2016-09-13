@@ -1,19 +1,19 @@
 #include <iostream>
+#include <string>
+#include <regex>
 #include "LinkedList.h"
+
 using namespace std;
 class Node
 {
     public:
         int num;
-        Node* next;
+        Node* next = NULL;
         Node();
         Node(int num);
         Node(int num, Node* next);
 };
-Node::Node()
-{
-    //for buffer
-}
+
 Node::Node(int num)
 {
     this->num = num;
@@ -27,58 +27,53 @@ Node::Node(int num, Node* next)
 class LinkedList
 {
     public:
-    Node* buffer_ = new Node;
-    Node* tail_ = buffer_;
-        void add(int what);
-        void add(int where, int what);
+        Node* buffer_ = new Node(NULL);
+        Node* tail_ = buffer_;
+        void add(int to_add);
+        void add(int where_to, int to_add);
         void print();
 };
-void add::LinkedList(int what)
+void LinkedList::add(int to_add)
 {
-    tail_->next = new Node;
+    tail_->next = new Node(to_add);
     tail_ = tail_->next;
-    tail_->num = what;
 }
-void add::LinkedList(int where, int what)
+void LinkedList::add(int where_to, int to_add)
 {
     Node* foo = buffer_;
-    for(int i = 0; i < where; i++)
+    for(int i = 0; i < where_to; i++)
     {
         foo = foo->next;
     }
-    foo->num = what;
+    foo->num = to_add;
     if(tail_->next == foo)
     {
-        tail_->next = new Node;
+        tail_ = foo;
     }
 }
-void print::LinkedList()
+void LinkedList::print()
 {
     Node* printing_node = buffer_;
     while(printing_node != tail_)
+    {
+        cout << printing_node->num << endl;
+    }
 }
 
 int main()
 {
     LinkedList Foo;
     int user_in = 1;
-    while(1)
+    while(user_in)
     {
-        cout << "Input an int, or don't to end this."
-        try
-        {
-            cin >> user_in;
-        }
-        catch
-        {
-            break;
-        }
+        cout << "Input an int, or don't to end this.";
+        cin >> user_in;
         Foo.add(user_in);
     }
-    cout << "Would you like to print the list? Y/N"
-    char response = "";
+    cout << "Would you like to print the list? Y/N";
+    string response = "";
     cin >> response;
-    if (response = 'Y')
+    if (response == "Y")
     {
         Foo.print();
     }
