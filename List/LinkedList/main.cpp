@@ -68,7 +68,7 @@ int main()
 {
     LinkedList Foo;
     int user_in = 1;
-    while(user_in)
+    while(1)
     {
         cout << "Input an int, or don't to end this. ";
         cin >> user_in;
