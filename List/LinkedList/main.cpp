@@ -60,7 +60,6 @@ void LinkedList::print()
         cout << printing_node->num << ", ";
         printing_node = printing_node->next;
     }
-    printing_node = printing_node->next;
     cout << "and " << printing_node->num << " in the list." << endl;
 }
 
