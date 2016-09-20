@@ -71,7 +71,10 @@ bool LinkedList::Delete(string data)
         {
             if (sorting_node->next_->data_ == data)
             {
-                //something
+                Node* to_die = sorting_node->next_;
+                sorting_node->next_ = sorting_node->next_->next_;
+                delete to_die;
+                return true;
             }
         }
     }
