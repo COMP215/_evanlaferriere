@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1474400915 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\binarysearchtree.cpp
+	"binarysearchtree.hpp"
+	<string>
+
+1474401325 c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\binarysearchtree.hpp
+	<stdio.h>
+	<string>
+
+1474400523 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\main.cpp
+	<iostream>
+	"binarysearchtree.hpp"
+
+1474401520 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\linkedlist.cc
+	<iostream>
+	<string>
+	<regex>
+

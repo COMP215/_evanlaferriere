@@ -10,7 +10,7 @@
 #include <string>
 using namespace std;
 
-Node::Node(string data) {
+BSTNode::BSTNode(string data) {
     data_ = data;
     left_ = NULL;
     right_ = NULL;
@@ -23,11 +23,11 @@ BinarySearchTree::BinarySearchTree() {
 bool BinarySearchTree::Insert(string data) {
     if (root_ == NULL) {
         // Empty tree, make a root
-        root_ = new Node(data);
+        root_ = new BSTNode(data);
         return true;
     } else {
         // Non-empty tree, find correct position for data
-        Node* curr = root_;
+        BSTNode* curr = root_;
         while (curr != NULL) {
             if (data == curr->data_) {
                 // Data already in tree, fail to insert
@@ -35,7 +35,7 @@ bool BinarySearchTree::Insert(string data) {
             } else if (data < curr->data_) {
                 // Lexicographically lesser, find location to the left
                 if (curr->left_ == NULL) {
-                    curr->left_ = new Node(data);
+                    curr->left_ = new BSTNode(data);
                     return true;
                 } else {
                     curr = curr->left_;
@@ -43,7 +43,7 @@ bool BinarySearchTree::Insert(string data) {
             } else {
                 // Lexicographically greater, find location to the right
                 if (curr->right_ == NULL) {
-                    curr->right_ = new Node(data);
+                    curr->right_ = new BSTNode(data);
                     return true;
                 } else {
                     curr = curr->right_;

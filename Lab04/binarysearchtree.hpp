@@ -12,25 +12,25 @@
 #include <stdio.h>
 #include <string>
 
-class Node {
+class BSTNode {
 public:
     std::string data_;
-    Node* left_;
-    Node* right_;
-    
+    BSTNode* left_;
+    BSTNode* right_;
+
 public:
-    Node(std::string);
+   BSTNode(std::string);
 };
 
 
 class BinarySearchTree {
-    Node* root_;
-    
+    BSTNode* root_;
+
 public:
     BinarySearchTree();
     bool Insert(std::string);
+    bool Search(std::string);
+    bool Delete(std::string);
 };
-
-
 
 #endif /* binarysearchtree_hpp */
