@@ -6,21 +6,21 @@ using namespace std;
 class Node
 {
     public:
-        int num;
-        Node* next = NULL;
+        string data_;
+        Node* next_ = NULL;
         Node();
-        Node(int num);
-        Node(int num, Node* next);
+        Node(string data);
+        Node(string data, Node* next);
 };
 
-Node::Node(int num)
+Node::Node(string data)
 {
-    this->num = num;
+    data_ = data;
 }
-Node::Node(int num, Node* next)
+Node::Node(string data, Node* next)
 {
-    this->num = num;
-    this->next = next;
+    data_ = data;
+    next_ = next;
 }
 
 class LinkedList
@@ -28,52 +28,50 @@ class LinkedList
     public:
         Node* buffer_ = new Node(NULL);
         Node* tail_ = buffer_;
-        void add(int to_add);
-        void add(int where_to, int to_add);
         void print();
+        void Insert(string to_add);
+        bool Search(string);
+        bool Delete(string);
 };
-void LinkedList::add(int to_add)
+void LinkedList::Insert(string to_add)
 {
-    tail_->next = new Node(to_add);
-    tail_ = tail_->next;
+    tail_->next_ = new Node(to_add);
+    tail_ = tail_->next_;
 }
-void LinkedList::add(int where_to, int to_add)
-{
-    Node* foo = buffer_;
-    for(int i = 0; i < where_to; i++)
-    {
-        foo = foo->next;
-    }
-    foo->num = to_add;
-    if(tail_->next == foo)
-    {
-        tail_ = foo;
-    }
-}
+
 void LinkedList::print()
 {
-    Node* printing_node = buffer_->next;
+    Node* printing_node = buffer_->next_;
     cout << "There were ";
-    while(printing_node->next != tail_)
+    while(printing_node->next_ != tail_)
     {
-        cout << printing_node->num << ", ";
-        printing_node = printing_node->next;
+        cout << printing_node->data_ << ", ";
+        printing_node = printing_node->next_;
     }
-    cout << "and " << printing_node->num << " in the list." << endl;
+    cout << "and " << printing_node->data_ << " in the list." << endl;
 }
 
-int mian()
+bool LinkedList::Search(string data)
 {
-    LinkedList Foo;
-    int user_in = 1;
-    while(1)
+    Node* sorting_node = buffer_;
+    while(sorting_node != tail_)
     {
-        cout << "Input an int, or don't to end this. ";
-        cin >> user_in;
-        if (cin.fail())
-            break;
-        Foo.add(user_in);
+        if (sorting_node->data_ == data)
+            return True;
     }
-    Foo.print();
+    return False;
 }
 
+bool LinkedList::Delete(string data)
+{
+    Node* sorting_node = buffer_;
+    while(sorting_node != tail_)
+    {
+        if (sorting_node->next_->data_ == data)
+        {
+
+            delete sorting_node
+        }
+    }
+    return False;
+}

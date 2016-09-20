@@ -16,9 +16,11 @@ class LinkedList
     public:
         Node* buffer_ = new Node(NULL);
         Node* tail_ = buffer_;
-        void add(int to_add);
-        void add(int where_to, int to_add);
+        void Insert(int to_add);
+        void Insert(int where_to, int to_add);
         void print();
+        bool Search(string);
+        bool Delete(string);
 };
 
 #endif
