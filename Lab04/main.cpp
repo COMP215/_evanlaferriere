@@ -19,10 +19,8 @@ int main(int argc, const char * argv[]) {
     people_names->Insert("decoste");
 
     LinkedList Foo;
-    std::string user_in = " ";
-    Foo.Insert(user_in);
+    Foo.Insert("evan");
     Foo.print();
 
-    std::cout << "Hello, World!\n";
     return 0;
 }
