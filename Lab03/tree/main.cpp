@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 using namespace std;
 class Node
 {
@@ -94,7 +93,7 @@ void Tree::Add(Node* sorting_node)
 }
 int main()
 {
-    int foo[8] = {17,34,9,16,10,1,74,20};
+    int foo[8] = {17,34,9,16,10,1,74,90};
     Tree bar(foo, 8);
     return 0;
 }
