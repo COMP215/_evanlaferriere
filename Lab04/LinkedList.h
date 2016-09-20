@@ -19,8 +19,8 @@ class LinkedList
         void Insert(int to_add);
         void Insert(int where_to, int to_add);
         void print();
-        bool Search(string);
-        bool Delete(string);
+        bool Search(std::string data);
+        bool Delete(std::string data);
 };
 
 #endif

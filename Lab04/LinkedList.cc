@@ -57,21 +57,23 @@ bool LinkedList::Search(string data)
     while(sorting_node != tail_)
     {
         if (sorting_node->data_ == data)
-            return True;
+            return true;
     }
-    return False;
+    return false;
 }
 
 bool LinkedList::Delete(string data)
 {
     Node* sorting_node = buffer_;
-    while(sorting_node != tail_)
+    if(Search(data))
     {
-        if (sorting_node->next_->data_ == data)
+        while(sorting_node != tail_)
         {
-
-            delete sorting_node
+            if (sorting_node->next_->data_ == data)
+            {
+                //something
+            }
         }
     }
-    return False;
+    return false;
 }
