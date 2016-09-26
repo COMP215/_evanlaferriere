@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
     string cargo = "";
     while(getline(in_file, cargo))
     {
-        cout << words->Insert(cargo) << endl;
+        //cout << words->Insert(cargo) << endl;
         more_words.Insert(cargo);
     }
     ifstream search_file("words.txt");
