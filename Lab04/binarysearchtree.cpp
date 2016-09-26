@@ -54,7 +54,7 @@ bool BinarySearchTree::Insert(string data) {
     }
     return false;
 }
-bool BinarySearchTree::Search(string data)
+string BinarySearchTree::Search(string data)
 {
     BSTNode* sorting_node = root_;
     while(sorting_node->data_!=data)
