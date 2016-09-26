@@ -33,7 +33,7 @@ void LinkedList::print()
     cout << "and " << printing_node->data_ << " in the list." << endl;
 }
 
-bool LinkedList::Search(string data)
+string LinkedList::Search(string data)
 {
     Node* sorting_node = buffer_;
     while(sorting_node != tail_)
