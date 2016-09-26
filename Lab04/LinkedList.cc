@@ -1,17 +1,9 @@
 #include <iostream>
 #include <string>
 #include <regex>
+#include "LinkedList.h"
 
 using namespace std;
-class Node
-{
-    public:
-        string data_;
-        Node* next_ = NULL;
-        Node();
-        Node(string data);
-        Node(string data, Node* next);
-};
 
 Node::Node(string data)
 {
@@ -23,16 +15,6 @@ Node::Node(string data, Node* next)
     next_ = next;
 }
 
-class LinkedList
-{
-    public:
-        Node* buffer_ = new Node(NULL);
-        Node* tail_ = buffer_;
-        void print();
-        void Insert(string to_add);
-        bool Search(string);
-        bool Delete(string);
-};
 void LinkedList::Insert(string to_add)
 {
     tail_->next_ = new Node(to_add);
