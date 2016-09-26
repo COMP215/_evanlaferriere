@@ -4,7 +4,7 @@
 class Node
 {
     public:
-        std::string data_;
+        std::string data_ = "";
         Node* next_ = NULL;
         Node();
         Node(std::string data);
@@ -14,7 +14,7 @@ class Node
 class LinkedList
 {
     public:
-        Node* buffer_ = new Node(NULL);
+        Node* buffer_ = new Node("");
         Node* tail_ = buffer_;
         void Insert(std::string to_add);
         void Insert(int where_to, std::string to_add);

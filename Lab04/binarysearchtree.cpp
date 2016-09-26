@@ -19,7 +19,6 @@ BSTNode::BSTNode(string data) {
 
 BinarySearchTree::BinarySearchTree() {
     root_ = NULL;
-    data_ = "";
 }
 
 bool BinarySearchTree::Insert(string data) {

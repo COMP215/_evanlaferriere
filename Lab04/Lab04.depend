@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1474489948 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\binarysearchtree.cpp
+1474920986 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\binarysearchtree.cpp
 	"binarysearchtree.hpp"
 	<iostream>
 	<string>
@@ -8,16 +8,17 @@
 	<stdio.h>
 	<string>
 
-1474490736 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\main.cpp
+1474920734 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\main.cpp
 	<iostream>
 	<fstream>
 	"binarysearchtree.hpp"
 	"LinkedList.h"
 
-1474403510 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\linkedlist.cc
+1474920908 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\linkedlist.cc
 	<iostream>
 	<string>
 	<regex>
+	"LinkedList.h"
 
-1474403320 c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\linkedlist.h
+1474921345 c:\users\eben\desktop\algorithms\_evanlaferriere\lab04\linkedlist.h
 
