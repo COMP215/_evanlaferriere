@@ -47,7 +47,7 @@ string LinkedList::Search(string data)
 bool LinkedList::Delete(string data)
 {
     Node* sorting_node = buffer_;
-    if(Search(data))
+    if(Search(data)!="Not found LL")
     {
         while(sorting_node != tail_)
         {
