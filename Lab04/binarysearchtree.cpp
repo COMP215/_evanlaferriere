@@ -63,7 +63,7 @@ bool BinarySearchTree::Search(string data)
         {
             sorting_node = sorting_node->left_;
             if(sorting_node == NULL)
-                return false;
+                return "Not found BST";
         }
         else
         {
@@ -71,11 +71,11 @@ bool BinarySearchTree::Search(string data)
             {
                 sorting_node = sorting_node->right_;
                 if(sorting_node == NULL)
-                    return false;
+                    return "Not found BST";
             }
         }
     }
-    return true;
+    return sorting_node->data_;
 }
 bool BinarySearchTree::Delete(string data)
 {

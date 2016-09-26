@@ -39,9 +39,9 @@ bool LinkedList::Search(string data)
     while(sorting_node != tail_)
     {
         if (sorting_node->data_ == data)
-            return true;
+            return sorting_node->data_;
     }
-    return false;
+    return "Not found LL";
 }
 
 bool LinkedList::Delete(string data)

@@ -29,7 +29,7 @@ class BinarySearchTree {
 public:
     BinarySearchTree();
     bool Insert(std::string);
-    bool Search(std::string);
+    string Search(std::string);
     bool Delete(std::string);
     void InOrder();
     void InOrder(BSTNode* node);
