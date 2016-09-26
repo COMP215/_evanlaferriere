@@ -25,12 +25,14 @@ public:
 
 class BinarySearchTree {
     BSTNode* root_;
-
+    void InOrder(BSTNode root);
 public:
     BinarySearchTree();
     bool Insert(std::string);
     bool Search(std::string);
     bool Delete(std::string);
+    void InOrder();
+    void InOrder(BSTNode* node);
 };
 
 #endif /* binarysearchtree_hpp */

@@ -7,20 +7,30 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "binarysearchtree.hpp"
 #include "LinkedList.h"
 
+using namespace std;
+
 int main(int argc, const char * argv[]) {
 
-    BinarySearchTree* people_names = new BinarySearchTree();
-    people_names->Insert("gousie");
-    people_names->Insert("bloch");
-    people_names->Insert("armstrong");
-    people_names->Insert("decoste");
+    BinarySearchTree* words = new BinarySearchTree();
+    LinkedList more_words;
+    ifstream in_file("foowords.txt");
+    string cargo;
+    while(getline(in_file, cargo))
+    {
+        cout << words->Insert(cargo) << endl;
+        more_words.Insert(cargo);
+    }
+    ifstream search_file("words.txt");
+    while(getline(search_file, cargo))
+    {
+        cout << words->Search(cargo) << endl;
+        cout << more_words.Search(cargo);
+    }
 
-    LinkedList Foo;
-    Foo.Insert("evan");
-    Foo.print();
 
     return 0;
 }

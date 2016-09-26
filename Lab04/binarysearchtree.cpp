@@ -7,6 +7,7 @@
 //
 
 #include "binarysearchtree.hpp"
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -55,5 +56,70 @@ bool BinarySearchTree::Insert(string data) {
 }
 bool BinarySearchTree::Search(string data)
 {
-
+    BSTNode* sorting_node = root_;
+    while(sorting_node->data_!=data)
+    {
+        if(sorting_node->data_ > data)
+        {
+            sorting_node = sorting_node->left_;
+            if(sorting_node == NULL)
+                return false;
+        }
+        else
+        {
+            if(sorting_node->data_ < data)
+            {
+                sorting_node = sorting_node->right_;
+                if(sorting_node == NULL)
+                    return false;
+            }
+        }
+    }
+    return true;
 }
+bool BinarySearchTree::Delete(string data)
+{
+    BSTNode* sorting_node = root_;
+    while(sorting_node->data_!=data)
+    {
+        if(sorting_node->data_ > data)
+        {
+            sorting_node = sorting_node->left_;
+            if(sorting_node == NULL)
+                return false;
+        }
+        else
+        {
+            if(sorting_node->data_ < data)
+            {
+                sorting_node = sorting_node->right_;
+                if(sorting_node == NULL)
+                    return false;
+            }
+        }
+    }
+    if (sorting_node->data_ == data)
+    {
+
+        return true;
+    }
+    return false;
+}
+void BinarySearchTree::InOrder()
+{
+    if(root_ != NULL)
+       InOrder(root_);
+}
+void BinarySearchTree::InOrder(BSTNode* node)
+{
+    if(node->left_ != NULL)
+    {
+        InOrder(node->left_);
+    }
+    cout << node->data_ << endl;
+    if(node->right_ != NULL)
+    {
+        InOrder(node->right_);
+    }
+}
+
