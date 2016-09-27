@@ -57,7 +57,7 @@ bool BinarySearchTree::Insert(string data) {
 string BinarySearchTree::Search(string data)
 {
     BSTNode* sorting_node = root_;
-    while(sorting_node->data_!=data)
+    while(!(sorting_node->data_==data))
     {
         if(sorting_node->data_ > data)
         {

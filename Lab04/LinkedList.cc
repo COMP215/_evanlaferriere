@@ -47,17 +47,14 @@ string LinkedList::Search(string data)
 bool LinkedList::Delete(string data)
 {
     Node* sorting_node = buffer_;
-    if(Search(data)!="Not found LL")
+    while(sorting_node != tail_)
     {
-        while(sorting_node != tail_)
+        if (sorting_node->next_->data_ == data)
         {
-            if (sorting_node->next_->data_ == data)
-            {
-                Node* to_die = sorting_node->next_;
-                sorting_node->next_ = sorting_node->next_->next_;
-                delete to_die;
-                return true;
-            }
+            Node* to_die = sorting_node->next_;
+            sorting_node->next_ = sorting_node->next_->next_;
+            delete to_die;
+            return true;
         }
     }
     return false;
