@@ -1,10 +1,11 @@
 #include "node.h"
+#include <iostream>
 #include <vector>
 Node::Node()
 {
     edges_ = {};
 }
-Node::Node(name)
+Node::Node(std::string name)
 {
     edges_ = {};
     name_ = name;
@@ -13,14 +14,15 @@ void Node::Add(Node* to_add)
 {
     this->edges_.push_back(to_add);
 }
+
 void Node::PrintAdjList()
 {
-    cout << this->name_ << ':';
-    for(int i = this->edges_.size(); i > 1; i--)
+    std::cout << name_ << ':';
+    for(int i = edges_.size(); i > 1; i--)
     {
-        cout << ' ' << edges_[i].name_;
+        std::cout << ' ' << edges_[i]->name_;
     }
-    cout << ' ' << edges_[0].name;
+    std::cout << ' ' << edges_[0]->name_ << std::endl;
 
 }
 

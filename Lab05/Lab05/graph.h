@@ -4,11 +4,11 @@
 #include "node.h"
 class Graph
 {
-    vector<Node*> All_Nodes_ = {};
+    std::vector<Node*> All_Nodes_ = {};
     public:
         void Add(Node to_add);
-        void Add(Node to_add, vector<Node*> edges);
-        void AddVertex(std::string name, vector<Node*> edges);
+        void Add(Node to_add, std::vector<Node*> edges);
+        void AddVertex(std::string name, std::vector<Node*> edges);
         void Printer();
 };
 #endif // GRAPH_H

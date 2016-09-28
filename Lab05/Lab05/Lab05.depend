@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1475092914 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab05\lab05\graph.cpp
+	"graph.h"
+	<iostream>
+	<vector>
+
+1475022456 c:\users\eben\desktop\algorithms\_evanlaferriere\lab05\lab05\graph.h
+	<vector>
+	"node.h"
+
+1475092328 c:\users\eben\desktop\algorithms\_evanlaferriere\lab05\lab05\node.h
+	<vector>
+	<string>
+
+1475093174 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab05\lab05\main.cpp
+	<iostream>
+	<vector>
+	"graph.h"
+
+1475093200 source:c:\users\eben\desktop\algorithms\_evanlaferriere\lab05\lab05\nodes.cpp
+	"node.h"
+	<iostream>
+	<vector>
+
