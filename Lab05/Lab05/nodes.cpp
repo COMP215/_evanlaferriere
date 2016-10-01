@@ -13,6 +13,7 @@ Node::Node(std::string name)
 void Node::Add(Node* to_add)
 {
     this->edges_.push_back(to_add);
+    to_add->edges_.push_back(this);
 }
 
 void Node::PrintAdjList()

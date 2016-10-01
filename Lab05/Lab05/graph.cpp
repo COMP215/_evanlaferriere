@@ -68,7 +68,7 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
 {
     if(edgesEach > (numNodes*(numNodes-1) / 2))
     {
-        std::cout << "Bad gen" << endl;
+        std::cout << "Bad data" << endl;
         return;
     }
     srand (time(NULL));
@@ -76,38 +76,31 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
     for(int i = 0; i < numNodes; i++)
     {
         string word = "";
-        for(int j=0; j < wordWidth; j++)
-        {
-            int t = rand();
-            word = word + (randGen[t%randGen.length()]);
-        }
-        while(this->Find(word))
-        {
+        do{
             for(int j=0; j < wordWidth; j++)
             {
                 int t = rand();
                 word = word + (randGen[t%randGen.length()]);
             }
-        }
+        }while(this->Find(word));
         All_Nodes_.push_back(new Node(word));
     }
-    for(int i = 0; i < All_Nodes_.size();i++)
+    for(int i = 0; i < All_Nodes_.size(); i++)
     {
-        int j = All_Nodes_[i]->edges_.size();
-        //cout << "Node " << All_Nodes_[i]->name_ << " has " << j << "edges rn."<< endl;
-        for(; j < edgesEach; j++)
+        while(All_Nodes_[i]->edges_.size() < edgesEach)
         {
-            //All_Nodes_[i]->Add(All_Nodes_[rand()%All_Nodes_.size()]); adds just three random nodes
-            Node* to_add = All_Nodes_[i];
-            do{
-                to_add = All_Nodes_[rand()%All_Nodes_.size()];
-            }while(to_add->edges_.size() >= edgesEach);
-            if (to_add == All_Nodes_[i])
-                break;
-            to_add->Add(All_Nodes_[i]);
-            //cout << "Added " << to_add->name_ << endl;
-            All_Nodes_[i]->Add(to_add);
+            int j = rand()%All_Nodes_.size();
+            if(j != i)
+            {
+                if(All_Nodes_[i]->edges_.size() < edgesEach && All_Nodes_[j]->edges_.size() < edgesEach)
+                {
+                    All_Nodes_[i]->Add(All_Nodes_[j]);
+                }
+            }
         }
-
+        if(All_Nodes_[i]->edges_.size() == 0)
+        {
+            All_Nodes_[i]->Add(new Node("No connections"));
+        }
     }
 }
