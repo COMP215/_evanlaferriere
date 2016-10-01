@@ -18,11 +18,11 @@ void Node::Add(Node* to_add)
 void Node::PrintAdjList()
 {
     std::cout << name_ << ':';
-    for(int i = edges_.size(); i > 1; i--)
+    for(int i = 0; i+1 < edges_.size(); i++)
     {
         std::cout << ' ' << edges_[i]->name_;
     }
-    std::cout << ' ' << edges_[0]->name_ << std::endl;
+    std::cout << ' ' << edges_[edges_.size()-1]->name_ << std::endl;
 
 }
 

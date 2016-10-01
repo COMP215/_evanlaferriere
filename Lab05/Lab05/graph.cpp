@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <time.h>
 using namespace std;
 void Graph::Add(Node to_add)
 {
@@ -59,9 +60,13 @@ bool Graph::Find(string name)
     }
     return found;
 }
+bool Graph::IsBipartite()
+{
+    return true;
+}
 void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
 {
-    if(edgesEach > (numNodes(numNodes-1) / 2))
+    if(edgesEach > (numNodes*(numNodes-1) / 2))
     {
         std::cout << "Bad gen" << endl;
         return;
@@ -88,9 +93,21 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
     }
     for(int i = 0; i < All_Nodes_.size();i++)
     {
-        for(int j = 0; j < edgesEach; j++)
+        int j = All_Nodes_[i]->edges_.size();
+        //cout << "Node " << All_Nodes_[i]->name_ << " has " << j << "edges rn."<< endl;
+        for(; j < edgesEach; j++)
         {
-            All_Nodes_[i]->Add()
+            //All_Nodes_[i]->Add(All_Nodes_[rand()%All_Nodes_.size()]); adds just three random nodes
+            Node* to_add = All_Nodes_[i];
+            do{
+                to_add = All_Nodes_[rand()%All_Nodes_.size()];
+            }while(to_add->edges_.size() >= edgesEach);
+            if (to_add == All_Nodes_[i])
+                break;
+            to_add->Add(All_Nodes_[i]);
+            //cout << "Added " << to_add->name_ << endl;
+            All_Nodes_[i]->Add(to_add);
         }
+
     }
 }

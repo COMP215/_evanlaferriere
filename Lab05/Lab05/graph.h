@@ -10,5 +10,8 @@ class Graph
         void Add(Node to_add, std::vector<Node*> edges);
         void AddVertex(std::string name, std::vector<Node*> edges);
         void Printer();
+        bool Find(std::string name);
+        bool IsBipartite();
+        void GenNodes(int numNodes, int edgesEach, int wordWidth);
 };
 #endif // GRAPH_H

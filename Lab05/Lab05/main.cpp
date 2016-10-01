@@ -6,16 +6,7 @@ using namespace std;
 int main()
 {
     Graph Foo;
-    Node A ("Mike");
-    Foo.Add(A);
-    Node B ("Evan");
-    vector<Node*> C;
-    C.push_back(&B);
-    Foo.AddVertex("Mike", C);
-    C.pop_back();
-    C.push_back(&A);
-    Foo.Add(B);
-    Foo.AddVertex("Evan", C);
+    Foo.GenNodes(4,2,1);
     Foo.Printer();
     return 0;
 }
