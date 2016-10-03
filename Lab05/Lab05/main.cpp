@@ -8,6 +8,6 @@ int main()
     Graph Foo;
     Foo.GenNodes(4,2,1);
     Foo.Printer();
-    //cout << "IsBipartite: " << Foo.IsBipartite();
+    cout << "IsBipartite: " << Foo.IsBipartite();
     return 0;
 }

@@ -63,11 +63,11 @@ bool Graph::Find(string name)
 }
 bool Graph::IsBipartite()
 {
-    bool inVar1 = false;
-    bool inVar2 = false;
-    int counter = 1;
     if(All_Nodes_.size() > 1)
     {
+        bool inVar1 = false;
+        bool inVar2 = false;
+        int counter = 1;
         vector<Node*> var1 = All_Nodes_[0]->edges_;
         vector<Node*> var2;
         for(; counter < All_Nodes_.size(); counter++)
@@ -91,6 +91,8 @@ bool Graph::IsBipartite()
         }
         for(int i = 1; i < All_Nodes_.size(); i++)
         {
+            inVar1 = false;
+            inVar2 = false;
             for(int j = 0; j < var1.size(); j++)
             {
                 if(All_Nodes_[i]==var1[j])
@@ -116,7 +118,7 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
         std::cout << "Bad data" << endl;
         return;
     }
-    string randGen = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtuvwxyz";
+    string randGen = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtuvwxyz";//why does this cause a segfault
     srand (time(NULL));
     for(int i = 0; i < numNodes; i++)
     {
@@ -134,7 +136,19 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
     int shuffleNodes[All_Nodes_.size()];
     for(int i = 0; i < All_Nodes_.size(); i++)
     {
-        shuffleNodes[i] = rand()%All_Nodes_.size();
+        int num = rand()%All_Nodes_.size();
+        bool check = true;
+        while(check)
+        {
+            check = false;
+            num = rand()%All_Nodes_.size();
+            for(int j = 0; j < All_Nodes_.size(); j++)
+            {
+                if(shuffleNodes[j]==num)
+                    check=true;
+            }
+        }
+        shuffleNodes[i] = num;
     }
     for(int i = 0; i < All_Nodes_.size(); i++)//For each node
     {
@@ -167,8 +181,9 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
     {
         if(All_Nodes_[i]->edges_.size() != edgesEach)
         {
-            GenNodes(numNodes, edgesEach, wordWidth);
+            //GenNodes(numNodes, edgesEach, wordWidth);
         }
 
     }
 }
+
