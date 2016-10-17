@@ -100,14 +100,31 @@ void Graph::ToGraphviz()
     std::ofstream outFile(outFileName);
     for(int i = 0; i < All_Vertices_.size(); i++)
     {
-        outFile << All_Vertices_[i] << ' ';
+        outFile << *All_Vertices_[i] << " ";
         if(numEdges(*All_Vertices_[i])>0)
         {
+            std::string subgraph = "-- {";
             for(int j = 0; j < numEdges(*All_Vertices_[i]); j++)
             {
-
+                for(int k = 0; k < All_Edges_.size(); k++)
+                {
+                    if(All_Edges_[k].Edge1_==*All_Vertices_[i])
+                    {
+                        subgraph += " " + All_Edges_[k].Edge1_;
+                    }
+                    else
+                    {
+                        if(All_Edges_[k].Edge2_==*All_Vertices_[i])
+                        {
+                        subgraph += " " + All_Edges_[k].Edge2_;
+                        }
+                    }
+                }
             }
+            subgraph += '}';
+            outFile << subgraph;
         }
+        outFile << std::endl;
     }
 }
 void Graph::AddEdge(std::string source, std::string target, int weight)

@@ -16,6 +16,6 @@ int main()
 {
     Graph Foo;
     Foo.GenNodes(8,3,1);
-
+    Foo.ToGraphviz();
     return 0;
 }
