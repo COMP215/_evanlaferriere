@@ -8,7 +8,7 @@ class Edge
         Edge();
         std::string Edge1_;
         std::string Edge2_;
-        int weight = 0;
+        int weight;
         Edge(std::string anEdge, std::string edgy);
     private:
 };

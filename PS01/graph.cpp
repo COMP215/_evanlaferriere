@@ -4,11 +4,11 @@
 #include <vector>
 #include <time.h>
 #include <random>
+#include <fstream>
 Graph::Graph()
 {
-    //ctor
-    std::vector<Edge> All_Edges_ = {};
-    std::vector<std::string*> All_Vertices_ = {};
+    All_Edges_ = {};
+    All_Vertices_ = {};
 }
 void Graph::AddEdge(std::string anEdge, std::string edgy)
 {
@@ -79,10 +79,10 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
         }
     }
 }
-int Graph::numEdges(string vertex)
+int Graph::numEdges(std::string vertex)
 {
     int counter = 0;
-    for(int i = 0; i < All_Edges_; i++)
+    for(int i = 0; i < All_Edges_.size(); i++)
     {
         if(All_Edges_[i].Edge1_ == vertex)
             counter++;
@@ -90,4 +90,28 @@ int Graph::numEdges(string vertex)
             counter++;
     }
     return counter;
+}
+void Graph::ToGraphviz()
+{
+    std::cout << "Please name output file. Do not include extension." << std::endl;
+    std::string outFileName;
+    std::cin >> outFileName;
+    outFileName += ".dot";
+    std::ofstream outFile(outFileName);
+    for(int i = 0; i < All_Vertices_.size(); i++)
+    {
+        outFile << All_Vertices_[i] << ' ';
+        if(numEdges(*All_Vertices_[i])>0)
+        {
+            for(int j = 0; j < numEdges(*All_Vertices_[i]); j++)
+            {
+
+            }
+        }
+    }
+}
+void Graph::AddEdge(std::string source, std::string target, int weight)
+{
+    All_Edges_.push_back(Edge(source, target));
+    All_Edges_[All_Edges_.size()-1].weight = weight;
 }

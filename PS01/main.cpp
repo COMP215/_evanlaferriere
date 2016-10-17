@@ -3,6 +3,15 @@
 #include "graph.h"
 using namespace std;
 
+Graph PrimMST()
+{
+
+}
+Graph KruskalMST()
+{
+
+}
+
 int main()
 {
     Graph Foo;

@@ -5,6 +5,7 @@
 #include <vector>
 class Graph
 {
+    public:
     Graph();
     void AddEdge(std::string anEdge, std::string edgy); //Add edges to graph between the two vertexes 'anEdge' and 'edgy'
     void RemoveEdge(std::string anEdge, std::string edgy); //Remove an edge between two vertexes
@@ -18,7 +19,7 @@ class Graph
     void GenNodes(int numNodes, int edgesEach, int wordWidth); //Generates a new graph
     int numEdges(std::string vertex); //Returns number of edges that vertex "string" has
     private:
-        std::vector<Edge> All_Edges_;
-        std::vector<std::string*> All_Vertices_;
+        std::vector<Edge> All_Edges_ = {};
+        std::vector<std::string*> All_Vertices_ = {};
 };
 #endif
