@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1476667882 source:c:\users\eben\desktop\algorithms\_evanlaferriere\ps01\edge.cpp
+	"Edge.h"
+	<string>
+
+1476667874 c:\users\eben\desktop\algorithms\_evanlaferriere\ps01\edge.h
+	<string>
+

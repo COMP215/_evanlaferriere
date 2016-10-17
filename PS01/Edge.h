@@ -6,8 +6,9 @@ class Edge
 {
     public:
         Edge();
-        std::string* Edge1_;
-        std::string* Edge2_;
+        std::string Edge1_;
+        std::string Edge2_;
+        int weight = 0;
         Edge(std::string anEdge, std::string edgy);
     private:
 };

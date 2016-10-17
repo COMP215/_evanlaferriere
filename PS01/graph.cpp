@@ -1,189 +1,93 @@
 #include "graph.h"
+#include "Edge.h"
 #include <iostream>
 #include <vector>
-#include <random>
 #include <time.h>
-using namespace std;
-void Graph::Add(Node to_add)
+#include <random>
+Graph::Graph()
 {
-    this->All_Nodes_.push_back(&to_add);
+    //ctor
+    std::vector<Edge> All_Edges_ = {};
+    std::vector<std::string*> All_Vertices_ = {};
 }
-void Graph::Add(Node to_add, vector<Node*> edges)
+void Graph::AddEdge(std::string anEdge, std::string edgy)
 {
-    this->All_Nodes_.push_back(&to_add);
-    for(int i = 0; i < edges.size(); i++)
-    {
-        All_Nodes_[All_Nodes_.size()-1]->Add(edges[i]);
-    }
+    All_Edges_.push_back(Edge(anEdge, edgy));
 }
-void Graph::AddVertex(string name, vector<Node*> edges)
+
+void Graph::RemoveEdge(std::string anEdge, std::string edgy)
 {
-    bool found = false;
-    int counter = 0;
-    for(;counter < All_Nodes_.size(); counter++)
+    for(int i = 0; i < All_Edges_.size(); i++)
     {
-        if(All_Nodes_[counter]->name_ == name)
+        if(All_Edges_[i].Edge1_ == anEdge)
         {
-            found = true;
-            break;
-        }
-    }
-    if(found)
-    {
-        for(int i = 0; i < edges.size(); i++)
-        {
-            All_Nodes_[counter]->Add(edges[i]);
-        }
-    }
-    if(!found)
-    {
-        std::cout << "Bad add" << endl;
-    }
-}
-void Graph::Printer()
-{
-    cout << endl;
-    for(int i = 0; i < All_Nodes_.size(); i++)
-    {
-        All_Nodes_[i]->PrintAdjList();
-    }
-}
-bool Graph::Find(string name)
-{
-    bool found = false;
-    for(int i = 0; i < All_Nodes_.size(); i++)
-    {
-        if(All_Nodes_[i]->name_ == name)
-        {
-            found = true;
-            break;
-        }
-    }
-    return found;
-}
-bool Graph::IsBipartite()
-{
-    if(All_Nodes_.size() > 1)
-    {
-        bool inVar1 = false;
-        bool inVar2 = false;
-        int counter = 1;
-        vector<Node*> var1 = All_Nodes_[0]->edges_;
-        vector<Node*> var2;
-        for(; counter < All_Nodes_.size(); counter++)
-        {
-            for(int i = 0; i < var1.size(); i++)
+            if(All_Edges_[i].Edge2_ == edgy)
             {
-                if(All_Nodes_[counter]= var1[i])
-                {
-                    inVar1 = true;
-                }
-            }
-            if(inVar1)
-            {
-                vector<Node*> var2 = All_Nodes_[counter]->edges_;
-                break;
+                All_Edges_.erase(All_Edges_.begin()+i);
+                return;
             }
         }
-        if(var2.size() == 0)
+        if(All_Edges_[i].Edge1_ == edgy)
         {
-            return false;
-        }
-        for(int i = 1; i < All_Nodes_.size(); i++)
-        {
-            inVar1 = false;
-            inVar2 = false;
-            for(int j = 0; j < var1.size(); j++)
+            if(All_Edges_[i].Edge2_ == anEdge)
             {
-                if(All_Nodes_[i]==var1[j])
-                    inVar1 = true;
+                All_Edges_.erase(All_Edges_.begin()+i);
+                return;
             }
-            for(int j = 0; j < var2.size(); j++)
-            {
-                if(All_Nodes_[i]==var2[j])
-                    inVar2 = true;
-            }
-            if(inVar1&&inVar2)
-                return false;
         }
-        return true;
+
     }
-    return false;
+}
+
+void Graph::AddVertex(std::string to_add)
+{
+    All_Vertices_.push_back(&to_add);
+}
+
+void Graph::RemoveVertex(std::string to_remove)
+{
+    for(int i = 0; i < All_Vertices_.size(); i++)
+    {
+        if(!All_Vertices_[i]->compare(to_remove))
+        {
+            All_Vertices_.erase(All_Vertices_.begin()+i);
+        }
+    }
 }
 void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
 {
-    All_Nodes_.clear();
-    if(edgesEach > (numNodes*(numNodes-1) / 2))
-    {
-        std::cout << "Bad data" << endl;
-        return;
-    }
-    string randGen = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtuvwxyz";//why does this cause a segfault
-    srand (time(NULL));
+    srand(time(NULL));
+    std::string randGen = "1234567890abcdefghijklmnopqrstuvwxyzABCEDFGHIJKLMNOPQRSTUVWXYZ";
     for(int i = 0; i < numNodes; i++)
     {
-        string word = "";
-        do{
-            for(int j=0; j < wordWidth; j++)
-            {
-                int k = rand();
-                word = word + randGen[k%randGen.length()];
-            }
-        }while(this->Find(word));
-        All_Nodes_.push_back(new Node(word));
-        //cout << "Made new node " << All_Nodes_.back()->name_ << endl;
+        std::string word = "";
+        for(int j = 0; j < wordWidth; j++)
+        {
+            word+=randGen[rand()%62];
+        }
+        All_Vertices_.push_back(new std::string(word));
     }
-    int shuffleNodes[All_Nodes_.size()];
-    for(int i = 0; i < All_Nodes_.size(); i++)//For each node
+    int rando;
+    for(int i = 0; i < numNodes; i++)
     {
-        for(int j = 0; j < All_Nodes_.size(); j++)
+        for(int j = numEdges(*All_Vertices_[i]); j < edgesEach; j++)
         {
-            int num = rand()%All_Nodes_.size();
-            bool check = true;
-            while(check)
-            {
-                check = false;
-                num = rand()%All_Nodes_.size();
-                for(int j = 0; j < All_Nodes_.size(); j++)
-                {
-                    if(shuffleNodes[j]==num)
-                        check=true;
-                }
-            }
-            shuffleNodes[i] = num;
+            do{
+                rando = rand()%All_Vertices_.size();
+            }while(rando==i);
+            AddEdge(*All_Vertices_[i], *All_Vertices_[rando]);
         }
-        cout << endl << "Adding to " << All_Nodes_[i]->name_;
-        for(int j = 0; j < All_Nodes_.size(); j++)//While the node doesn't have enough edges
-        {
-            //Get a random node
-            cout << " trying " << All_Nodes_[shuffleNodes[j]]->name_ << ' ';
-            if(shuffleNodes[j] != i)//If it is not the same node
-            {
-                if(All_Nodes_[shuffleNodes[j]]->edges_.size() < edgesEach)
-                {           //If it does not have enough sides either
-                    bool check = true;
-                    for(int k = 0; k < All_Nodes_[i]->edges_.size(); k++)
-                    {
-                        //For all the edges in the original node, if any of them are j, don't add them.
-                        if(All_Nodes_[i]->edges_[k] == All_Nodes_[shuffleNodes[j]])
-                            check = false;
-                    }
-                    if(check)
-                    {
-                        All_Nodes_[i]->Add(All_Nodes_[shuffleNodes[j]]);
-                        cout << " success." << endl;
-                    }
-                }
-            }
-        }
-    }
-    for(int i = 0; i < All_Nodes_.size(); i++)
-    {
-        if(All_Nodes_[i]->edges_.size() != edgesEach)
-        {
-            GenNodes(numNodes, edgesEach, wordWidth);
-        }
-
     }
 }
-
+int Graph::numEdges(string vertex)
+{
+    int counter = 0;
+    for(int i = 0; i < All_Edges_; i++)
+    {
+        if(All_Edges_[i].Edge1_ == vertex)
+            counter++;
+        if(All_Edges_[i].Edge2_ == vertex)
+            counter++;
+    }
+    return counter;
+}

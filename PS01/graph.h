@@ -1,17 +1,24 @@
 #ifndef GRAPH_H
 #define GRAPH_H
+#include "Edge.h"
+#include <string>
 #include <vector>
-#include "node.h"
 class Graph
 {
-    std::vector<Node*> All_Nodes_ = {};
-    public:
-        void Add(Node to_add);
-        void Add(Node to_add, std::vector<Node*> edges);
-        void AddVertex(std::string name, std::vector<Node*> edges);
-        void Printer();
-        bool Find(std::string name);
-        bool IsBipartite();
-        void GenNodes(int numNodes, int edgesEach, int wordWidth);
+    Graph();
+    void AddEdge(std::string anEdge, std::string edgy); //Add edges to graph between the two vertexes 'anEdge' and 'edgy'
+    void RemoveEdge(std::string anEdge, std::string edgy); //Remove an edge between two vertexes
+    void AddVertex(std::string to_add); //Adds vertex 'to_add' to the graph
+    void RemoveVertex(std::string to_remove); //Removes vertex 'to_remove' from the graph
+    void ToGraphviz();
+    void AddEdge(std::string source, std::string target, int weight);
+    Graph PrimMST();
+    Graph KruskalMST();
+
+    void GenNodes(int numNodes, int edgesEach, int wordWidth); //Generates a new graph
+    int numEdges(std::string vertex); //Returns number of edges that vertex "string" has
+    private:
+        std::vector<Edge> All_Edges_;
+        std::vector<std::string*> All_Vertices_;
 };
-#endif // GRAPH_H
+#endif
