@@ -32,6 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Edge.cpp" />
+		<Unit filename="Edge.h" />
+		<Unit filename="README.md" />
+		<Unit filename="graph.cpp" />
+		<Unit filename="graph.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

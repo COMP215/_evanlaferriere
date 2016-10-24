@@ -54,7 +54,7 @@ void Graph::RemoveVertex(std::string to_remove)
         }
     }
 }
-void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
+void Graph::GenGraph(int numNodes, int edgesEach, int wordWidth)
 {
     srand(time(NULL));
     std::string randGen = "1234567890abcdefghijklmnopqrstuvwxyzABCEDFGHIJKLMNOPQRSTUVWXYZ";
@@ -63,7 +63,9 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
         std::string word = "";
         for(int j = 0; j < wordWidth; j++)
         {
+            do{
             word+=randGen[rand()%62];
+            }while(FindVertex(word));
         }
         All_Vertices_.push_back(new std::string(word));
     }
@@ -74,8 +76,8 @@ void Graph::GenNodes(int numNodes, int edgesEach, int wordWidth)
         {
             do{
                 rando = rand()%All_Vertices_.size();
-            }while(rando==i);
-            AddEdge(*All_Vertices_[i], *All_Vertices_[rando]);
+            }while(rando==i || FindEdge(*All_Vertices_[i], *All_Vertices_[rando]));
+            AddEdge(*All_Vertices_[i], *All_Vertices_[rando], rand());
         }
     }
 }
@@ -86,49 +88,152 @@ int Graph::numEdges(std::string vertex)
     {
         if(All_Edges_[i].Edge1_ == vertex)
             counter++;
-        if(All_Edges_[i].Edge2_ == vertex)
-            counter++;
+        else
+        {
+            if(All_Edges_[i].Edge2_ == vertex)
+                counter++;
+        }
     }
     return counter;
 }
 void Graph::ToGraphviz()
 {
-    std::cout << "Please name output file. Do not include extension." << std::endl;
+    std::cout << "Please name output file. Do not include the file extension. ";
     std::string outFileName;
     std::cin >> outFileName;
     outFileName += ".dot";
     std::ofstream outFile(outFileName);
+    Graph check;
+    outFile << "graph g {" << std::endl;
     for(int i = 0; i < All_Vertices_.size(); i++)
     {
-        outFile << *All_Vertices_[i] << " ";
-        if(numEdges(*All_Vertices_[i])>0)
+        std::string subgraph = "";
+        for(int k = 0; k < All_Edges_.size(); k++)
         {
-            std::string subgraph = "-- {";
-            for(int j = 0; j < numEdges(*All_Vertices_[i]); j++)
+            if(All_Edges_[k].Edge1_ == *All_Vertices_[i] && !check.FindEdge(All_Edges_[k].Edge2_, *All_Vertices_[i]))
             {
-                for(int k = 0; k < All_Edges_.size(); k++)
+                subgraph += *All_Vertices_[i] + " -- " +  All_Edges_[k].Edge2_ + ';' + '\n';
+                check.All_Edges_.push_back(All_Edges_[k]);
+            }
+            else
+            {
+                if(All_Edges_[k].Edge2_ == *All_Vertices_[i] && !check.FindEdge(All_Edges_[k].Edge1_, *All_Vertices_[i]))
                 {
-                    if(All_Edges_[k].Edge1_==*All_Vertices_[i])
-                    {
-                        subgraph += " " + All_Edges_[k].Edge1_;
-                    }
-                    else
-                    {
-                        if(All_Edges_[k].Edge2_==*All_Vertices_[i])
-                        {
-                        subgraph += " " + All_Edges_[k].Edge2_;
-                        }
-                    }
+                    subgraph += *All_Vertices_[i] + " -- " + All_Edges_[k].Edge1_ + ';' + '\n';
+                    check.All_Edges_.push_back(All_Edges_[k]);
                 }
             }
-            subgraph += '}';
-            outFile << subgraph;
         }
-        outFile << std::endl;
+        outFile << subgraph;
     }
+    outFile << '}';
 }
+
 void Graph::AddEdge(std::string source, std::string target, int weight)
 {
-    All_Edges_.push_back(Edge(source, target));
-    All_Edges_[All_Edges_.size()-1].weight = weight;
+    All_Edges_.push_back(Edge(source, target, weight));
 }
+bool Graph::FindVertex(std::string to_find)
+{
+    for(int i = 0; i < All_Vertices_.size(); i++)
+    {
+        if(*All_Vertices_[i] == to_find)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+bool Graph::FindEdge(std::string to_find1, std::string to_find2)
+{
+    for(int i = 0; i < All_Edges_.size(); i++)
+    {
+        if(All_Edges_[i].Edge1_ == to_find1 && All_Edges_[i].Edge2_ == to_find2)
+            return true;
+        if(All_Edges_[i].Edge1_ == to_find2 && All_Edges_[i].Edge2_ == to_find1)
+            return true;
+    }
+}
+Graph Graph::PrimMST()
+{
+    Graph Prim;
+    Prim.AddVertex(*All_Vertices_[0]);
+    std::vector<Edge> CanEdge;
+    while(Prim.All_Vertices_.size() < All_Vertices_.size())
+    {
+        for(int i = 0; i < Prim.All_Vertices_.size(); i++)
+        {
+            for(int j = 0; j < All_Edges_.size(); j++)
+            {
+                if(All_Edges_[j].Edge1_ == *Prim.All_Vertices_[i])
+                    CanEdge.push_back(All_Edges_[j]);
+                if(All_Edges_[j].Edge2_ == *Prim.All_Vertices_[i])
+                    CanEdge.push_back(All_Edges_[j]);
+            }
+        }
+        int num = 0;
+        for(int i = 0; i < CanEdge.size(); i++)
+        {
+            if(Prim.FindEdge(CanEdge[i].Edge1_, CanEdge[i].Edge2_))
+                CanEdge.erase(CanEdge.begin()+i);
+        }
+        for(int i = 0; i < CanEdge.size(); i++)
+        {
+            if(CanEdge[i].weight < CanEdge[num].weight)
+                num = i;
+        }
+        Prim.All_Edges_.push_back(CanEdge[num]);
+        for(int i = 0; i < Prim.All_Edges_.size(); i++)
+        {
+            if(!Prim.FindVertex(Prim.All_Edges_[i].Edge1_))
+                Prim.AddVertex(Prim.All_Edges_[i].Edge1_);
+            else
+            {
+                if(!Prim.FindVertex(Prim.All_Edges_[i].Edge2_))
+                    Prim.AddVertex(Prim.All_Edges_[i].Edge2_);
+            }
+        }
+    }
+    return Prim;
+}
+Graph Graph::KruskalMST()
+{
+    Graph Kruskal;
+    int min_weight = 0;
+    for(int i = 0; i < All_Edges_.size(); i++)
+    {
+        if(All_Edges_[i].weight < All_Edges_[0].weight)
+        {
+            Edge swapper = All_Edges_[i];
+            All_Edges_.erase(All_Edges_.begin()+i);
+            All_Edges_.insert(All_Edges_.begin(), swapper);
+        }
+    }
+    for(int i = 0; i < All_Edges_.size(); i++)
+    {
+        if( !(Kruskal.All_Vertices_.size() < All_Vertices_.size()))
+        {
+            break;
+        }
+        if( !(Kruskal.FindVertex(All_Edges_[i].Edge1_)) && !(Kruskal.FindVertex(All_Edges_[i].Edge2_)) )
+        {
+            Kruskal.AddEdge(All_Edges_[i].Edge1_, All_Edges_[i].Edge2_);
+            Kruskal.AddVertex(All_Edges_[i].Edge1_);
+            Kruskal.AddVertex(All_Edges_[i].Edge2_);
+        }
+        if(Kruskal.FindVertex(All_Edges_[i].Edge1_)!= Kruskal.FindVertex(All_Edges_[i].Edge2_))
+        {
+            if(Kruskal.FindVertex(All_Edges_[i].Edge1_))
+            {
+                Kruskal.AddVertex(All_Edges_[i].Edge2_);
+            }
+            if(Kruskal.FindVertex(All_Edges_[i].Edge2_))
+            {
+                Kruskal.AddVertex(All_Edges_[i].Edge1_);
+            }
+            Kruskal.AddEdge(All_Edges_[i].Edge1_, All_Edges_[i].Edge2_);
+        }
+    }
+    return Kruskal;
+}
+

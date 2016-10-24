@@ -3,19 +3,13 @@
 #include "graph.h"
 using namespace std;
 
-Graph PrimMST()
-{
-
-}
-Graph KruskalMST()
-{
-
-}
-
 int main()
 {
     Graph Foo;
-    Foo.GenNodes(8,3,1);
+    Foo.GenGraph(5,2,1);
     Foo.ToGraphviz();
+    Graph FooKruskal = Foo.KruskalMST();
+    FooKruskal.ToGraphviz();
+    //FooPrim.ToGraphviz();
     return 0;
 }

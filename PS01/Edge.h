@@ -10,6 +10,7 @@ class Edge
         std::string Edge2_;
         int weight;
         Edge(std::string anEdge, std::string edgy);
+        Edge(std::string anEdge, std::string edgy, int weight);
     private:
 };
 

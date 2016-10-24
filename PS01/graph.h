@@ -16,7 +16,9 @@ class Graph
     Graph PrimMST();
     Graph KruskalMST();
 
-    void GenNodes(int numNodes, int edgesEach, int wordWidth); //Generates a new graph
+    bool FindVertex(std::string to_find);
+    bool FindEdge(std::string to_find1, std::string to_find2);
+    void GenGraph(int numNodes, int edgesEach, int wordWidth); //Generates a new graph
     int numEdges(std::string vertex); //Returns number of edges that vertex "string" has
     private:
         std::vector<Edge> All_Edges_ = {};
