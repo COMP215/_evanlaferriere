@@ -8,8 +8,9 @@ int main()
     Graph Foo;
     Foo.GenGraph(5,2,1);
     Foo.ToGraphviz();
+    Graph FooPrim = Foo.PrimMST();
     Graph FooKruskal = Foo.KruskalMST();
     FooKruskal.ToGraphviz();
-    //FooPrim.ToGraphviz();
+    FooPrim.ToGraphviz();
     return 0;
 }
