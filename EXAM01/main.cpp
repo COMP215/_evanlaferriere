@@ -18,6 +18,7 @@ std::vector<Mushroom> read_csv()
     std::vector<Mushroom> shrooms;
     while ( std::getline(input, to_mushroom) )
     {
+        std::cout << to_mushroom << endl;
         shrooms.push_back(Mushroom());
         com_num = to_mushroom.find(',');
         shrooms.back().common_name_ = to_mushroom.substr(0,com_num);
@@ -25,8 +26,9 @@ std::vector<Mushroom> read_csv()
         shrooms.back().scientific_name_ = to_mushroom.substr(com_num+1,sci_num);
         oz_num = to_mushroom.find(',', sci_num);
         shrooms.back().total_oz_ = std::atoi(to_mushroom.substr(sci_num+1, oz_num).c_str());
-        price = to_mushroom.find(',', oz_num);
-        shrooms.back().per_oz_value_ = std::atoi(to_mushroom.substr(price).c_str())/shrooms.back().total_oz_;
+        price = to_mushroom.find_last_of(',');
+        std::cout << "price pos: " << price << endl;
+        //shrooms.back().per_oz_value_ = std::atoi(to_mushroom.substr(price).c_str())/shrooms.back().total_oz_;
     }
 }
 void Go_Mushrooming()
