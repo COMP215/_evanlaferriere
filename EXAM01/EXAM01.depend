@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1477344234 source:c:\users\eben\desktop\algorithms\_evanlaferriere\exam01\main.cpp
+	<iostream>
+	"Mushroom.h"
+	<fstream>
+	<string>
+	<cstdlib>
+
+1477343324 source:c:\users\eben\desktop\algorithms\_evanlaferriere\exam01\src\mushroom.cpp
+	"Mushroom.h"
+
+1477343300 c:\users\eben\desktop\algorithms\_evanlaferriere\exam01\include\mushroom.h
+	<string>
+	<vector>
+
