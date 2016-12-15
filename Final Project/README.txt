@@ -1,0 +1,10 @@
+#Contents
+Rand.py
+	Two functions and a few lines to be executed while running, to produce randomly generated numbers.
+	def nextPrime(seed)
+		Returns the next prime number after seed.
+		While it took a while to get the logic just right, writing this was much more straightforward than the random number generator
+	def random(number_to_generate, seed)
+		Prints out random numbers
+		I took the middle square approach, but coming up with something that didn't get stuck depleting itself out with zeroes or absurdly huge numbers was a lot harder than making a big number and taking a hunk of out the middle seems. But it works now. 
+
